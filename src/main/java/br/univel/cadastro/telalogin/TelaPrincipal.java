@@ -2,21 +2,18 @@ package br.univel.cadastro.telalogin;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.function.Function;
 
 public class TelaPrincipal extends JFrame {
+	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
@@ -62,7 +59,7 @@ public class TelaPrincipal extends JFrame {
 
 		});
 		mnCadastros.add(mntmCliente);
-		
+
 		JMenuItem mntmBloquear = new JMenuItem("BLOQUEAR");
 		mntmBloquear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -82,12 +79,12 @@ public class TelaPrincipal extends JFrame {
 	protected void block() {
 		setGlassPane(glass);
 		glass.setVisible(true);
-		
+
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				for (int i =0; i < 5; i++) {
+				for (int i = 0; i < 5; i++) {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {

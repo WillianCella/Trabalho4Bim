@@ -21,11 +21,11 @@ import java.awt.Color;
 import javax.swing.JButton;
 
 public class PainelLogin extends JPanel {
-	
+	private static final long serialVersionUID = 1L;
+
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private JButton btnEntrar;
-	private JButton btnEntrar2;
 
 	public PainelLogin() {
 		setBackground(Color.WHITE);

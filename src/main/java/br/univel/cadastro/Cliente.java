@@ -1,4 +1,4 @@
-package br.univel;
+package br.univel.cadastro;
 
 public class Cliente {
 	private int id;

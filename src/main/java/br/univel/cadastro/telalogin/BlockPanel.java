@@ -6,13 +6,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
 public class BlockPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
 
 	public BlockPanel() {
 		setOpaque(false);
@@ -23,16 +22,14 @@ public class BlockPanel extends JPanel {
 		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
-		
-		
-		
+
 		addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				arg0.consume();
 			}
-			
+
 		});
 	}
 
@@ -45,7 +42,6 @@ public class BlockPanel extends JPanel {
 		gbc_panel.gridy = 0;
 		add(painelCentral, gbc_panel);
 		setVisible(true);
-
 
 	}
 

@@ -2,9 +2,8 @@ package br.univel.cadastro.telalogin;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JPanel;
-
 public class TelaCadastroCliente extends MolduraAbstrata {
+	private static final long serialVersionUID = 1L;
 
 	public TelaCadastroCliente() {
 		super();

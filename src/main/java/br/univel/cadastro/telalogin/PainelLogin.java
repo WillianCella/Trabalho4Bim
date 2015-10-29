@@ -25,6 +25,7 @@ public class PainelLogin extends JPanel {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private JButton btnEntrar;
+	private JButton btnEntrar2;
 
 	public PainelLogin() {
 		setBackground(Color.WHITE);

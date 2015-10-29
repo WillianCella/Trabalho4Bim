@@ -82,12 +82,12 @@ public class PainelLogin extends JPanel {
 	public PainelLogin(Runnable acaoOk) {
 		this();
 		btnEntrar.addActionListener(e -> {
-			if (textField.getText().trim().equals("1")
-					&& new String(passwordField.getPassword()).equals("1")) {
+			if (textField.getText().trim().equals("root")
+					&& new String(passwordField.getPassword()).equals("123")) {
 				acaoOk.run();
 			} else {
 				JOptionPane.showMessageDialog(PainelLogin.this,
-						"Usu√°rio e/ou senha inv√°lidos!");
+						"Usu·rio e/ou senha inv·lidos!");
 			}
 		});
 

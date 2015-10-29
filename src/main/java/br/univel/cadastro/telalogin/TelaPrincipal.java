@@ -1,5 +1,9 @@
 package br.univel.cadastro.telalogin;
 
+/**
+ * @author Willian Cella - 29/10/2015 - 19:31:30
+ */
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -66,6 +70,12 @@ public class TelaPrincipal extends JFrame {
 				block();
 			}
 		});
+		
+		JMenuItem mntmUsurio = new JMenuItem("Usu\u00E1rio");
+		mnCadastros.add(mntmUsurio);
+		
+		JMenuItem mntmProduto = new JMenuItem("Produto");
+		mnCadastros.add(mntmProduto);
 		mnCadastros.add(mntmBloquear);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

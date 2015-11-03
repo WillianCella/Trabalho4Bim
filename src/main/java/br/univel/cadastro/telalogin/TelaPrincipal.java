@@ -47,7 +47,7 @@ public class TelaPrincipal extends JFrame {
 		blockParaLogin();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 608, 385);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -70,10 +70,7 @@ public class TelaPrincipal extends JFrame {
 				block();
 			}
 		});
-		
-		JMenuItem mntmUsurio = new JMenuItem("Usu\u00E1rio");
-		mnCadastros.add(mntmUsurio);
-		
+
 		JMenuItem mntmProduto = new JMenuItem("Produto");
 		mnCadastros.add(mntmProduto);
 		mnCadastros.add(mntmBloquear);
@@ -132,6 +129,7 @@ public class TelaPrincipal extends JFrame {
 		telaCadastroCliente.setCloseAction(action);
 
 		tabbedPane.addTab("Tela ", telaCadastroCliente);
+
 	}
 
 }

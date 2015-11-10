@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
+import br.univel.cadastro.Cliente;
+import br.univel.cadastro.ClienteDAOImpl;
 import br.univel.cadastro.Estado;
 import br.univel.cadastro.Genero;
 
@@ -193,6 +195,9 @@ public class MioloCadastroCliente extends JPanel {
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ClienteDAOImpl cdao = new ClienteDAOImpl();
+				Cliente c = new Cliente();
+				cdao.inserir(c);
 			}
 		});
 		GridBagConstraints gbc_btnSalvar = new GridBagConstraints();

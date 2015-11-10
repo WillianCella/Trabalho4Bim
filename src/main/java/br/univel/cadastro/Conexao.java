@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Conexao {
 	private Connection conexao;
 
-	public Connection getcConnection() {
+	public Connection getConnection() {
 		if (conexao == null)
 			try {
 				abrirconexao();

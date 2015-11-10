@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,7 +17,7 @@ public abstract class MolduraAbstrata extends JPanel {
 
 	private JButton btnFechar;
 
-	protected abstract void configuraMiolo();
+	protected abstract void configuraMiolo() throws SQLException;
 
 	public void setCloseAction(ActionListener action) {
 		btnFechar.addActionListener(action);
@@ -24,8 +25,9 @@ public abstract class MolduraAbstrata extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @throws SQLException 
 	 */
-	public MolduraAbstrata() {
+	public MolduraAbstrata() throws SQLException {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();

@@ -12,5 +12,7 @@ public interface ClienteDAO {
 	
 	public Cliente buscar(int id);
 	
+	public List<Cliente> consultar();
+	
 	public List<Cliente> listar();
 }

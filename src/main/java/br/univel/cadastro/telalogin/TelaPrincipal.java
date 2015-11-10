@@ -6,6 +6,7 @@ package br.univel.cadastro.telalogin;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,8 +14,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 public class TelaPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -58,7 +61,11 @@ public class TelaPrincipal extends JFrame {
 		JMenuItem mntmCliente = new JMenuItem("Cliente");
 		mntmCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				abrirTela();
+				try {
+					abrirTela();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 
 		});
@@ -118,7 +125,7 @@ public class TelaPrincipal extends JFrame {
 		glass.setVisible(true);
 	}
 
-	private void abrirTela() {
+	private void abrirTela() throws SQLException {
 		TelaCadastroCliente telaCadastroCliente = new TelaCadastroCliente();
 		ActionListener action = new ActionListener() {
 			@Override

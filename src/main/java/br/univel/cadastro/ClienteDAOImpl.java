@@ -5,9 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-
-import br.univel.dao.ClienteDAO;
 
 public class ClienteDAOImpl implements ClienteDAO {
 
@@ -74,29 +73,54 @@ public class ClienteDAOImpl implements ClienteDAO {
 
 	@Override
 	public Cliente buscar(int idCliente) {
-		Statement st = null;
+		Cliente c = new Cliente();
+		PreparedStatement st = null;
 		ResultSet result = null;
+		String sql = ("SELECT * FROM cliente WHERE id = " + idCliente);
 		try {
-			try {
-				st = (Statement) ((Connection) con).createStatement();
-				result = ((java.sql.Statement) st)
-						.executeQuery("SELECT * FROM PESSOA");
-				while (result.next()) {
-					int id = result.getInt(1);
-					String nome = result.getString("nome");
-					System.out.println(id + " " + nome);
-				}
-			} finally {
-				if (st != null)
-					((Connection) st).close();
-				if (result != null)
-					result.close();
+			st = con.getConnection().prepareStatement(sql);
+			result = st.executeQuery();
+			while (result.next()) {
+				c.setId(idCliente);
+				c.setNome(result.getString("nome"));
+				c.setTelefone(result.getString("fone"));
+				c.setEndereco(result.getString("endereco"));
+				c.setCidade(result.getString("cidade"));
+				c.setEstado(Estado.valueOf(result.getString("estado")));
+				c.setEmail(result.getString("email"));
+				c.setGenero(Genero.valueOf(result.getString("genero")));
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return c;
+	}
 
-		return null;
+	@Override
+	public List<Cliente> consultar() {
+		List<Cliente> lista = new ArrayList<>();
+		PreparedStatement st = null;
+		ResultSet result = null;
+		String sql = ("SELECT * FROM cliente");
+		try {
+			st = con.getConnection().prepareStatement(sql);
+			result = st.executeQuery();
+			while (result.next()) {
+				Cliente c = new Cliente();
+				c.setId(result.getInt("id"));
+				c.setNome(result.getString("nome"));
+				c.setTelefone(result.getString("fone"));
+				c.setEndereco(result.getString("endereco"));
+				c.setCidade(result.getString("cidade"));
+				c.setEstado(Estado.valueOf(result.getString("estado")));
+				c.setEmail(result.getString("email"));
+				c.setGenero(Genero.valueOf(result.getString("genero")));
+				lista.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
 	}
 
 	@Override

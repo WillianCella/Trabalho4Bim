@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
 
 public abstract class MolduraAbstrata extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -48,6 +49,10 @@ public abstract class MolduraAbstrata extends JPanel {
 		panel.add(lblOla, gbc_lblOla);
 
 		btnFechar = new JButton("Fechar");
+		btnFechar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		GridBagConstraints gbc_btnFechar = new GridBagConstraints();
 		gbc_btnFechar.anchor = GridBagConstraints.EAST;
 		gbc_btnFechar.gridx = 1;

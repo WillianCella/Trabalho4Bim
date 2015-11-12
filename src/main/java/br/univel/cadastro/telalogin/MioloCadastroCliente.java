@@ -267,6 +267,11 @@ public class MioloCadastroCliente extends JPanel {
 		add(btnSalvar, gbc_btnSalvar);
 
 		btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txfId.setEnabled(false);
+			}
+		});
 		GridBagConstraints gbc_btnEditar = new GridBagConstraints();
 		gbc_btnEditar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnEditar.gridx = 0;

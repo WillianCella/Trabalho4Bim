@@ -10,6 +10,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicTabbedPaneUI.TabbedPaneLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -168,5 +169,7 @@ public class TelaPrincipal extends JFrame {
 		tabbedPane.addTab("Tela ", telaCadastroCliente);
 
 	}
+	
+	//tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
 
 }

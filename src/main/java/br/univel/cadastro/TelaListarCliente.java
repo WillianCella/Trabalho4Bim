@@ -2,7 +2,6 @@ package br.univel.cadastro;
 
 import java.awt.BorderLayout;
 import java.sql.SQLException;
-import br.univel.cadastro.telalogin.MioloCadastroCliente;
 import br.univel.cadastro.telalogin.MolduraAbstrata;
 
 public class TelaListarCliente extends MolduraAbstrata {
@@ -17,7 +16,7 @@ public class TelaListarCliente extends MolduraAbstrata {
 
 	@Override
 	protected void configuraMiolo() throws SQLException {
-		super.add(new MioloCadastroCliente(), BorderLayout.CENTER);
+		super.add(new TableListarCliente(), BorderLayout.CENTER);
 	}
 
 }

@@ -15,6 +15,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 
+import br.univel.cadastro.TelaListarCliente;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
@@ -81,6 +83,21 @@ public class TelaPrincipal extends JFrame {
 		JMenuItem mntmProduto = new JMenuItem("Produto");
 		mnCadastros.add(mntmProduto);
 		mnCadastros.add(mntmBloquear);
+
+		JMenu mnListar = new JMenu("Listar");
+		menuBar.add(mnListar);
+
+		JMenuItem mntmCliente_1 = new JMenuItem("Cliente");
+		mntmCliente_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					abrirListarCliente();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		mnListar.add(mntmCliente_1);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -88,6 +105,19 @@ public class TelaPrincipal extends JFrame {
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+	}
+
+	private void abrirListarCliente() throws SQLException {
+		TelaListarCliente listarcliente = new TelaListarCliente();
+		ActionListener action = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.remove(listarcliente);
+			}
+		};
+		listarcliente.setCloseAction(action);
+
+		tabbedPane.addTab("Tela ", listarcliente);
 	}
 
 	protected void block() {

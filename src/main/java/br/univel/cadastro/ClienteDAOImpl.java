@@ -1,7 +1,5 @@
 package br.univel.cadastro;
 
-import java.beans.Statement;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -127,6 +125,11 @@ public class ClienteDAOImpl implements ClienteDAO {
 	public List<Cliente> listar() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void buscarPorID(int id) {
+		
 	}
 
 }

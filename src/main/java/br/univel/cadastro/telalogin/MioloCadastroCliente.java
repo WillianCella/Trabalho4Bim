@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -62,14 +63,16 @@ public class MioloCadastroCliente extends JPanel {
 	protected JButton btnSalvar;
 	protected JButton btnEditar;
 	protected JTextField txfIdEditar;
-	protected JButton btnAtualizar;
+	protected JButton btnBuscar;
 	protected JButton btnExcluir;
 	protected JLabel lblId_1;
 	protected JTextField txfId;
+	private JButton btnNovo;
 
 	/**
 	 * Create the panel.
-	 * @throws SQLException 
+	 * 
+	 * @throws SQLException
 	 */
 	public MioloCadastroCliente() throws SQLException {
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -97,6 +100,25 @@ public class MioloCadastroCliente extends JPanel {
 		gbc_txfId.gridy = 0;
 		add(txfId, gbc_txfId);
 		txfId.setColumns(10);
+		txfId.requestFocus();
+
+		btnNovo = new JButton("Novo");
+		btnNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txfId.setEnabled(true);
+				txfNome.setEnabled(true);
+				txfTelefone.setEnabled(true);
+				txfEndereco.setEnabled(true);
+				txfCidade.setEnabled(true);
+				txfEmail.setEnabled(true);
+				txfIdEditar.setEnabled(true);
+			}
+		});
+		GridBagConstraints gbc_btnNovo = new GridBagConstraints();
+		gbc_btnNovo.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNovo.gridx = 3;
+		gbc_btnNovo.gridy = 0;
+		add(btnNovo, gbc_btnNovo);
 
 		JLabel lblNewLabel = new JLabel("Nome");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -233,7 +255,7 @@ public class MioloCadastroCliente extends JPanel {
 				c.setGenero((Genero) cbxGenero.getSelectedItem());
 
 				cdao.inserir(c);
-				
+
 				limpar();
 			}
 		});
@@ -268,35 +290,56 @@ public class MioloCadastroCliente extends JPanel {
 		add(txfIdEditar, gbc_txfIdEditar);
 		txfIdEditar.setColumns(10);
 
-		btnAtualizar = new JButton("Atualizar");
-		GridBagConstraints gbc_btnAtualizar = new GridBagConstraints();
-		gbc_btnAtualizar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnAtualizar.gridx = 3;
-		gbc_btnAtualizar.gridy = 9;
-		add(btnAtualizar, gbc_btnAtualizar);
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txfId.setEnabled(false);
+				buscarCliente();
+			}
+		});
+		GridBagConstraints gbc_btnBuscar = new GridBagConstraints();
+		gbc_btnBuscar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnBuscar.gridx = 3;
+		gbc_btnBuscar.gridy = 9;
+		add(btnBuscar, gbc_btnBuscar);
 
 		btnExcluir = new JButton("Excluir");
 		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
 		gbc_btnExcluir.gridx = 4;
 		gbc_btnExcluir.gridy = 9;
 		add(btnExcluir, gbc_btnExcluir);
-		
-		Conexao con = new Conexao();
-		String sql = "SELECT * FROM cliente ORDER BY idcliente DESC LIMIT 1";
-		PreparedStatement ps = con.getConnection().prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-		//System.out.println(rs);
-		//txfId.setText(rs);
+
+		// Conexao con = new Conexao();
+		// String sql = "SELECT * FROM cliente ORDER BY idcliente DESC LIMIT 1";
+		// PreparedStatement ps = con.getConnection().prepareStatement(sql);
+		// ResultSet rs = ps.executeQuery();
+		// System.out.println(rs);
+		// txfId.setText(rs);
 
 	}
 
+	protected void buscarCliente() {
+		ClienteDAOImpl cdao = new ClienteDAOImpl();
+		int id = 0;
+		if ((txfIdEditar.getText().equals(0)) || (txfIdEditar.getText() == "")
+				|| (txfIdEditar.getText() == null)) {
+			JOptionPane
+					.showMessageDialog(null, "ID inválido, Informe outro ID");
+		} else {
+			id = Integer.parseInt(txfIdEditar.getText());
+			cdao.buscarPorID(id);
+		}
+	}
+
 	protected void limpar() {
+		txfId.setText("");
+		txfId.requestFocus();
 		txfNome.setText("");
 		txfCidade.setText("");
 		txfEmail.setText("");
 		txfEndereco.setText("");
 		txfTelefone.setText("");
-		
+
 	}
 
 }

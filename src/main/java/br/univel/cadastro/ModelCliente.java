@@ -1,5 +1,6 @@
 package br.univel.cadastro;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -9,7 +10,7 @@ public class ModelCliente extends AbstractTableModel {
 
 	ClienteDAOImpl cdao = new ClienteDAOImpl();
 
-	List<Cliente> lista;
+	List<Cliente> lista = new ArrayList<>();
 
 	public ModelCliente() {
 		lista = cdao.listar();

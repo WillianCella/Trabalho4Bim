@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 public class ClienteDAOImpl implements ClienteDAO {
 
 	Conexao con = new Conexao();
@@ -24,7 +26,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 			ps.setString(7, c.getGenero().toString());
 
 			ps.executeUpdate();
-
+			JOptionPane.showMessageDialog(null, "Salvo com Sucesso!");
 			ps.close();
 
 		} catch (SQLException e) {
@@ -35,7 +37,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 
 	@Override
 	public void atualizar(Cliente c) {
-		String sql = "UPDATE cliente SET NOME = ?, TELEFONE = ?, ENDERECO = ?, CIDADE = ?, ESTADO = ?, EMAIL = ?, GENERO = ? WHERE ID = ? ";
+		String sql = "UPDATE cliente SET NOME = ?, FONE = ?, ENDERECO = ?, CIDADE = ?, ESTADO = ?, EMAIL = ?, GENERO = ? WHERE IDCLIENTE = ? ";
 		try {
 			PreparedStatement ps = con.getConnection().prepareStatement(sql);
 			ps.setString(1, c.getNome());
@@ -45,7 +47,10 @@ public class ClienteDAOImpl implements ClienteDAO {
 			ps.setString(5, c.getEstado().toString());
 			ps.setString(6, c.getEmail());
 			ps.setString(7, c.getGenero().toString());
+			
 			ps.setInt(8, c.getId());
+			ps.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Salvo com Sucesso!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -121,18 +126,83 @@ public class ClienteDAOImpl implements ClienteDAO {
 		return lista;
 	}
 
+	// @Override
+	// public List<Cliente> listar() {
+	// List<Cliente> lista = new ArrayList<>();
+	// Statement st = null;
+	// ResultSet result = null;
+	// String sql = ("SELECT * FROM cliente");
+	// try {
+	// st = con.getConnection().createStatement();
+	// result = ((java.sql.Statement) st).execute(sql);
+	// while (result.next()) {
+	// Cliente c = new Cliente();
+	// c.setId(result.getInt("id"));
+	// c.setNome(result.getString("nome"));
+	// c.setTelefone(result.getString("fone"));
+	// c.setEndereco(result.getString("endereco"));
+	// c.setCidade(result.getString("cidade"));
+	// c.setEstado(Estado.valueOf(result.getString("estado")));
+	// c.setEmail(result.getString("email"));
+	// c.setGenero(Genero.valueOf(result.getString("genero")));
+	// lista.add(c);
+	// }
+	// System.out.println(lista);
+	// con.fecharConexao();
+	// } catch (SQLException e) {
+	// e.printStackTrace();
+	// }
+	//
+	// return lista;
+	// }
+
 	@Override
 	public List<Cliente> listar() {
-		List<Cliente> lista = new ArrayList<>();
 		PreparedStatement st = null;
 		ResultSet result = null;
-		String sql = ("SELECT * FROM cliente");
+		String sql = "SELECT * FROM cliente";
+		List<Cliente> lista = new ArrayList<>();
+		Cliente c;
+		try {
+			try {
+				st = con.getConnection().prepareStatement(sql);
+				result = st.executeQuery();
+
+				while (result.next()) {
+					c = new Cliente();
+					c.setId(result.getInt("idcliente"));
+					c.setNome(result.getString("nome"));
+					c.setTelefone(result.getString("fone"));
+					c.setEndereco(result.getString("endereco"));
+					c.setCidade(result.getString("cidade"));
+					c.setEstado(Estado.valueOf(result.getString("estado")));
+					c.setEmail(result.getString("email"));
+					c.setGenero(Genero.valueOf(result.getString("genero")));
+					lista.add(c);
+				}
+			} finally {
+				if (st != null)
+					st.close();
+				if (result != null)
+					result.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
+	@Override
+	public Cliente buscarPorID(int id) {
+		PreparedStatement st = null;
+		ResultSet result = null;
+		String sql = "SELECT * FROM cliente WHERE idcliente = " + id;
+		Cliente c = new Cliente();
 		try {
 			st = con.getConnection().prepareStatement(sql);
 			result = st.executeQuery();
 			while (result.next()) {
-				Cliente c = new Cliente();
-				c.setId(result.getInt("id"));
+				c.setId(result.getInt("idcliente"));
 				c.setNome(result.getString("nome"));
 				c.setTelefone(result.getString("fone"));
 				c.setEndereco(result.getString("endereco"));
@@ -140,18 +210,12 @@ public class ClienteDAOImpl implements ClienteDAO {
 				c.setEstado(Estado.valueOf(result.getString("estado")));
 				c.setEmail(result.getString("email"));
 				c.setGenero(Genero.valueOf(result.getString("genero")));
-				lista.add(c);
 			}
+			con.fecharConexao();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return lista;
-	}
-
-	@Override
-	public void buscarPorID(int id) {
-
+		return c;
 	}
 
 }

@@ -6,18 +6,14 @@ package br.univel.cadastro.telalogin;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicTabbedPaneUI.TabbedPaneLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
-
 import br.univel.cadastro.TelaListarCliente;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
@@ -50,7 +46,7 @@ public class TelaPrincipal extends JFrame {
 	 */
 	public TelaPrincipal() {
 
-		blockParaLogin();
+		// blockParaLogin();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 608, 385);
@@ -74,16 +70,8 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnCadastros.add(mntmCliente);
 
-		JMenuItem mntmBloquear = new JMenuItem("BLOQUEAR");
-		mntmBloquear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				block();
-			}
-		});
-
 		JMenuItem mntmProduto = new JMenuItem("Produto");
 		mnCadastros.add(mntmProduto);
-		mnCadastros.add(mntmBloquear);
 
 		JMenu mnListar = new JMenu("Listar");
 		menuBar.add(mnListar);
@@ -118,43 +106,23 @@ public class TelaPrincipal extends JFrame {
 		};
 		listarcliente.setCloseAction(action);
 
-		tabbedPane.addTab("Tela ", listarcliente);
+		tabbedPane.addTab("Listar Cliente ", listarcliente);
 	}
 
-	protected void block() {
-		setGlassPane(glass);
-		glass.setVisible(true);
-
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				for (int i = 0; i < 5; i++) {
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				glass.setVisible(false);
-			}
-		}).start();
-	}
-
-	private void blockParaLogin() {
-		Runnable acaoOk = () -> {
-			glass.setVisible(false);
-			glass = new BlockPanel();
-		};
-
-		PainelLogin painelLogin = new PainelLogin(acaoOk);
-
-		glass = new BlockPanel(painelLogin);
-
-		setGlassPane(glass);
-
-		glass.setVisible(true);
-	}
+	// private void blockParaLogin() {
+	// Runnable acaoOk = () -> {
+	// glass.setVisible(false);
+	// glass = new BlockPanel();
+	// };
+	//
+	// PainelLogin painelLogin = new PainelLogin(acaoOk);
+	//
+	// glass = new BlockPanel(painelLogin);
+	//
+	// setGlassPane(glass);
+	//
+	// glass.setVisible(true);
+	// }
 
 	private void abrirTela() throws SQLException {
 		TelaCadastroCliente telaCadastroCliente = new TelaCadastroCliente();
@@ -169,7 +137,7 @@ public class TelaPrincipal extends JFrame {
 		tabbedPane.addTab("Tela ", telaCadastroCliente);
 
 	}
-	
-	//tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
+
+	// tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
 
 }

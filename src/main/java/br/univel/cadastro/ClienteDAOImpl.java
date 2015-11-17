@@ -47,7 +47,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 			ps.setString(5, c.getEstado().toString());
 			ps.setString(6, c.getEmail());
 			ps.setString(7, c.getGenero().toString());
-			
+
 			ps.setInt(8, c.getId());
 			ps.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Salvo com Sucesso!");
@@ -59,15 +59,21 @@ public class ClienteDAOImpl implements ClienteDAO {
 
 	@Override
 	public void excluir(Cliente c) {
-		String sql = "DELETE FROM cliente WHRERE ID = ?";
+		String sql = "DELETE FROM cliente WHERE idcliente = " + c.getId();
 		try {
+			int opcao = JOptionPane.YES_NO_OPTION;
+			JOptionPane.showConfirmDialog(null, "Você tem certeza?",
+					"Atenção!", opcao);
+			if (opcao == JOptionPane.YES_OPTION) {
 			PreparedStatement ps = con.getConnection().prepareStatement(sql);
-			ps.setInt(1, c.getId());
-
+			//ps.setInt(1, c.getId());
 			ps.executeUpdate();
-
+			JOptionPane.showMessageDialog(null, "Cliente Excluído!");
 			ps.close();
-
+			}
+			if (opcao == JOptionPane.NO_OPTION) {
+				System.exit(0);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -67,7 +67,7 @@ public class MioloCadastroCliente extends JPanel {
 	protected JButton btnBuscar;
 	protected JButton btnExcluir;
 	protected JLabel lblId_1;
-	protected Cliente clienteContexto; 
+	protected Cliente clienteContexto;
 
 	/**
 	 * Create the panel.
@@ -75,11 +75,11 @@ public class MioloCadastroCliente extends JPanel {
 	 * @throws SQLException
 	 */
 	public MioloCadastroCliente() throws SQLException {
-		
-		if(clienteContexto == null){
+
+		if (clienteContexto == null) {
 			clienteContexto = new Cliente();
 		}
-		
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 64, 0, 0, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -212,8 +212,9 @@ public class MioloCadastroCliente extends JPanel {
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				txfIdEditar.setEnabled(true);
 				ClienteDAOImpl cdao = new ClienteDAOImpl();
-					
+
 				clienteContexto.setNome(txfNome.getText());
 				clienteContexto.setTelefone(txfTelefone.getText());
 				clienteContexto.setEndereco(txfEndereco.getText());
@@ -222,7 +223,7 @@ public class MioloCadastroCliente extends JPanel {
 				clienteContexto.setEmail(txfEmail.getText());
 				clienteContexto.setGenero((Genero) cbxGenero.getSelectedItem());
 
-				if(clienteContexto.getId() != 0){
+				if (clienteContexto.getId() != 0) {
 					limpar();
 					cdao.atualizar(clienteContexto);
 					return;
@@ -270,26 +271,32 @@ public class MioloCadastroCliente extends JPanel {
 		add(btnBuscar, gbc_btnBuscar);
 
 		btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ClienteDAOImpl cdao = new ClienteDAOImpl();
+				cdao.excluir(clienteContexto);
+				limpar();
+			}
+		});
 		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
 		gbc_btnExcluir.gridx = 4;
 		gbc_btnExcluir.gridy = 9;
 		add(btnExcluir, gbc_btnExcluir);
-
 
 	}
 
 	protected void buscarCliente() {
 		txfIdEditar.setEnabled(false);
 		ClienteDAOImpl cdao = new ClienteDAOImpl();
-		
+
 		int id = 0;
 		if ((txfIdEditar.getText() == null) || (txfIdEditar.getText() == "")
 				|| (txfIdEditar.getText().equals(0))) {
 			JOptionPane
 					.showMessageDialog(null, "ID inválido, Informe outro ID");
-			return ;
-		} 			
-		
+			return;
+		}
+
 		id = Integer.parseInt(txfIdEditar.getText());
 		clienteContexto = cdao.buscarPorID(id);
 		txfNome.setText(clienteContexto.getNome());
@@ -299,7 +306,7 @@ public class MioloCadastroCliente extends JPanel {
 		txfEmail.setText(clienteContexto.getEmail());
 		cbxEstado.setSelectedItem(clienteContexto.getEstado());
 		cbxGenero.setSelectedItem(clienteContexto.getGenero());
-	
+
 	}
 
 	protected void limpar() {
@@ -308,7 +315,8 @@ public class MioloCadastroCliente extends JPanel {
 		txfEmail.setText("");
 		txfEndereco.setText("");
 		txfTelefone.setText("");
-
+		cbxEstado.setSelectedIndex(0);
+		cbxGenero.setSelectedIndex(0);
 	}
 
 }

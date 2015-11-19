@@ -8,9 +8,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import br.univel.cadastro.Conexao;
-import br.univel.cadastro.Estado;
-import br.univel.cadastro.Genero;
+import br.univel.Conexao;
 
 public class ClienteDAOImpl implements ClienteDAO {
 

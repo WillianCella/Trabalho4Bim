@@ -1,4 +1,4 @@
-package br.univel.cadastro.produto;
+package br.univel.telas.produto;
 
 import javax.swing.JPanel;
 

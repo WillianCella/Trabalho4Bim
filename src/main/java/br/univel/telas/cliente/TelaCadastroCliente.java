@@ -1,7 +1,9 @@
-package br.univel.cadastro.telalogin;
+package br.univel.telas.cliente;
 
 import java.awt.BorderLayout;
 import java.sql.SQLException;
+
+import br.univel.telalogin.MolduraAbstrata;
 
 
 public class TelaCadastroCliente extends MolduraAbstrata {

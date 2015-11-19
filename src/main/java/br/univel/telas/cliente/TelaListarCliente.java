@@ -1,8 +1,9 @@
-package br.univel.cadastro;
+package br.univel.telas.cliente;
 
 import java.awt.BorderLayout;
 import java.sql.SQLException;
-import br.univel.cadastro.telalogin.MolduraAbstrata;
+
+import br.univel.telalogin.MolduraAbstrata;
 
 public class TelaListarCliente extends MolduraAbstrata {
 	private static final long serialVersionUID = 1L;

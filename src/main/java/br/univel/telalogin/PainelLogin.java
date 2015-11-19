@@ -1,4 +1,4 @@
-package br.univel.cadastro.telalogin;
+package br.univel.telalogin;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;

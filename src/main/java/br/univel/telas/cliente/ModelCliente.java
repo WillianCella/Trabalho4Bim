@@ -1,4 +1,4 @@
-package br.univel.cadastro;
+package br.univel.telas.cliente;
 
 import java.util.ArrayList;
 import java.util.List;

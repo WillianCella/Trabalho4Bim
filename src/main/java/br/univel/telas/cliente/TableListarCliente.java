@@ -1,9 +1,11 @@
-package br.univel.cadastro;
+package br.univel.telas.cliente;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+
 import javax.swing.JTable;
 
 public class TableListarCliente extends JPanel {

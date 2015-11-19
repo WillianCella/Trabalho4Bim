@@ -1,4 +1,4 @@
-package br.univel.cadastro.telalogin;
+package br.univel.telalogin;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

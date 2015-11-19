@@ -1,9 +1,6 @@
-package br.univel.cadastro.produto;
+package br.univel.usuario;
 
 import java.util.List;
-
-import br.univel.usuario.Usuario;
-import br.univel.usuario.UsuarioDAO;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 

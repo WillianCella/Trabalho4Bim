@@ -1,4 +1,4 @@
-package br.univel.cadastro;
+package br.univel.cliente;
 
 public enum Genero {
 	M, F;

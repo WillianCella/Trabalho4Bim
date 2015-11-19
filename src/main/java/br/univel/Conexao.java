@@ -1,4 +1,4 @@
-package br.univel.cadastro;
+package br.univel;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

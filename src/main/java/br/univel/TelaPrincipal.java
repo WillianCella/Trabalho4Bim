@@ -1,4 +1,4 @@
-package br.univel.cadastro.telalogin;
+package br.univel;
 
 /**
  * @author Willian Cella - 29/10/2015 - 19:31:30
@@ -6,6 +6,7 @@ package br.univel.cadastro.telalogin;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,7 +14,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
-import br.univel.cadastro.TelaListarCliente;
+
+import br.univel.telalogin.BlockPanel;
+import br.univel.telas.cliente.TelaCadastroCliente;
+import br.univel.telas.cliente.TelaListarCliente;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package br.univel.cadastro.telalogin;
+package br.univel.telalogin;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;

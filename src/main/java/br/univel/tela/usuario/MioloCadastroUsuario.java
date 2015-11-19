@@ -1,4 +1,4 @@
-package br.univel.cadastro.telalogin;
+package br.univel.tela.usuario;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;

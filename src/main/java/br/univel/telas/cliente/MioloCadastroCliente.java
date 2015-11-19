@@ -1,4 +1,4 @@
-package br.univel.cadastro.telalogin;
+package br.univel.telas.cliente;
 
 import javax.swing.JPanel;
 
@@ -16,11 +16,11 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
-import br.univel.cadastro.Conexao;
-import br.univel.cadastro.Estado;
-import br.univel.cadastro.Genero;
+import br.univel.Conexao;
 import br.univel.cliente.Cliente;
 import br.univel.cliente.ClienteDAOImpl;
+import br.univel.cliente.Estado;
+import br.univel.cliente.Genero;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

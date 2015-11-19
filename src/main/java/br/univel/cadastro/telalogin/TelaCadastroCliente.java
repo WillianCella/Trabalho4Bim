@@ -3,6 +3,7 @@ package br.univel.cadastro.telalogin;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
 
+
 public class TelaCadastroCliente extends MolduraAbstrata {
 	private static final long serialVersionUID = 1L;
 

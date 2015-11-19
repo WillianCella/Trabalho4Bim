@@ -1,4 +1,4 @@
-package br.univel.cadastro;
+package br.univel.cliente;
 
 import java.util.List;
 

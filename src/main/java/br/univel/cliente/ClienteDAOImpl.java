@@ -1,4 +1,4 @@
-package br.univel.cadastro;
+package br.univel.cliente;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+
+import br.univel.cadastro.Conexao;
+import br.univel.cadastro.Estado;
+import br.univel.cadastro.Genero;
 
 public class ClienteDAOImpl implements ClienteDAO {
 

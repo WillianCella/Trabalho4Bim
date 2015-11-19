@@ -1,19 +1,9 @@
-package br.univel.cadastro;
-
-import br.univel.cliente.Cliente;
+package br.univel.usuario;
 
 public class Usuario {
-	private Cliente idCliente;
 	private int id;
+	private int idCliente;
 	private String senha;
-
-	public Cliente getIdCliente() {
-		return idCliente;
-	}
-
-	public void setIdCliente(Cliente idCliente) {
-		this.idCliente = idCliente;
-	}
 
 	public int getId() {
 		return id;
@@ -23,6 +13,14 @@ public class Usuario {
 		this.id = id;
 	}
 
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+
 	public String getSenha() {
 		return senha;
 	}
@@ -30,4 +28,5 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
 }

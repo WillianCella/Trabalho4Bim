@@ -16,11 +16,11 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
-import br.univel.cadastro.Cliente;
-import br.univel.cadastro.ClienteDAOImpl;
 import br.univel.cadastro.Conexao;
 import br.univel.cadastro.Estado;
 import br.univel.cadastro.Genero;
+import br.univel.cliente.Cliente;
+import br.univel.cliente.ClienteDAOImpl;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

@@ -61,7 +61,7 @@ public class TelaPrincipal extends JFrame {
 		mntmCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					abrirTela();
+					abrirTelaCliente();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -71,6 +71,15 @@ public class TelaPrincipal extends JFrame {
 		mnCadastros.add(mntmCliente);
 
 		JMenuItem mntmProduto = new JMenuItem("Produto");
+		mntmProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					abrirTelaProduto();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		mnCadastros.add(mntmProduto);
 
 		JMenu mnListar = new JMenu("Listar");
@@ -124,7 +133,11 @@ public class TelaPrincipal extends JFrame {
 	// glass.setVisible(true);
 	// }
 
-	private void abrirTela() throws SQLException {
+	protected void abrirTelaProduto() {
+		// TODO Auto-generated method stub
+	}
+
+	private void abrirTelaCliente() throws SQLException {
 		TelaCadastroCliente telaCadastroCliente = new TelaCadastroCliente();
 		ActionListener action = new ActionListener() {
 			@Override

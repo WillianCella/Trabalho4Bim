@@ -1,4 +1,7 @@
-package br.univel.cadastro;
+package br.univel.cliente;
+
+import br.univel.cadastro.Estado;
+import br.univel.cadastro.Genero;
 
 public class Cliente {
 	private int id;

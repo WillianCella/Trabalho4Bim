@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import br.univel.cliente.Cliente;
+import br.univel.cliente.ClienteDAOImpl;
+
 public class ModelCliente extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 

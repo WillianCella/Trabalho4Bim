@@ -23,8 +23,9 @@ public class Conexao {
 		String pass = "postgres";
 		conexao = DriverManager.getConnection(url, user, pass);
 	}
-	
-	public void fecharConexao() throws SQLException{
+
+	public void fecharConexao() throws SQLException {
 		conexao.close();
 	}
+
 }

@@ -212,6 +212,10 @@ public class MioloCadastroCliente extends JPanel {
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				salvar();
+			}
+
+			private void salvar() {
 				txfIdEditar.setEnabled(true);
 				ClienteDAOImpl cdao = new ClienteDAOImpl();
 

@@ -18,6 +18,7 @@ import javax.swing.JTabbedPane;
 import br.univel.telalogin.BlockPanel;
 import br.univel.telas.cliente.TelaCadastroCliente;
 import br.univel.telas.cliente.TelaListarCliente;
+import br.univel.telas.produto.TelaCadastroProduto;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -138,8 +139,19 @@ public class TelaPrincipal extends JFrame {
 	// glass.setVisible(true);
 	// }
 
-	protected void abrirTelaProduto() {
-		// TODO Auto-generated method stub
+	// tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
+
+	protected void abrirTelaProduto() throws SQLException {
+		TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto();
+		ActionListener action = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.remove(telaCadastroProduto);
+			}
+		};
+		telaCadastroProduto.setCloseAction(action);
+
+		tabbedPane.addTab("Produto ", telaCadastroProduto);
 	}
 
 	private void abrirTelaCliente() throws SQLException {
@@ -152,10 +164,8 @@ public class TelaPrincipal extends JFrame {
 		};
 		telaCadastroCliente.setCloseAction(action);
 
-		tabbedPane.addTab("Tela ", telaCadastroCliente);
+		tabbedPane.addTab("Cliente ", telaCadastroCliente);
 
 	}
-
-	// tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
 
 }

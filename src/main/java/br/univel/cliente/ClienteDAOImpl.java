@@ -67,11 +67,12 @@ public class ClienteDAOImpl implements ClienteDAO {
 			JOptionPane.showConfirmDialog(null, "Você tem certeza?",
 					"Atenção!", opcao);
 			if (opcao == JOptionPane.YES_OPTION) {
-			PreparedStatement ps = con.getConnection().prepareStatement(sql);
-			//ps.setInt(1, c.getId());
-			ps.executeUpdate();
-			JOptionPane.showMessageDialog(null, "Cliente Excluído!");
-			ps.close();
+				PreparedStatement ps = con.getConnection()
+						.prepareStatement(sql);
+				// ps.setInt(1, c.getId());
+				ps.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Cliente Excluído!");
+				ps.close();
 			}
 			if (opcao == JOptionPane.NO_OPTION) {
 				System.exit(0);

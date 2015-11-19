@@ -1,4 +1,4 @@
-package br.univel.telas.produto;
+package br.univel.tela.produto;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;

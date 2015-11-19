@@ -1,4 +1,4 @@
-package br.univel.telas.cliente;
+package br.univel.tela.cliente;
 
 import java.awt.BorderLayout;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package br.univel.telas.cliente;
+package br.univel.tela.cliente;
 
 import java.util.ArrayList;
 import java.util.List;

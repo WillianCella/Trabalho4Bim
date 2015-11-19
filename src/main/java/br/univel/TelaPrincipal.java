@@ -15,10 +15,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 
+import br.univel.tela.cliente.TelaCadastroCliente;
+import br.univel.tela.cliente.TelaListarCliente;
+import br.univel.tela.produto.TelaCadastroProduto;
+import br.univel.tela.usuario.TelaCadastroUsuario;
 import br.univel.telalogin.BlockPanel;
-import br.univel.telas.cliente.TelaCadastroCliente;
-import br.univel.telas.cliente.TelaListarCliente;
-import br.univel.telas.produto.TelaCadastroProduto;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -86,6 +87,18 @@ public class TelaPrincipal extends JFrame {
 				}
 			}
 		});
+
+		JMenuItem mntmUsurio = new JMenuItem("Usu\u00E1rio");
+		mntmUsurio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					abrirTelaUsuario();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		mnCadastros.add(mntmUsurio);
 		mnCadastros.add(mntmProduto);
 
 		JMenu mnListar = new JMenu("Listar");
@@ -111,6 +124,21 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 	}
 
+	protected void abrirTelaUsuario() throws SQLException {
+		TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario();
+		ActionListener action = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.remove(telaCadastroUsuario);
+			}
+		};
+		telaCadastroUsuario.setCloseAction(action);
+
+		tabbedPane.addTab("Usuário ", telaCadastroUsuario);
+
+		ultimaAba();
+	}
+
 	private void abrirListarCliente() throws SQLException {
 		TelaListarCliente listarcliente = new TelaListarCliente();
 		ActionListener action = new ActionListener() {
@@ -122,6 +150,7 @@ public class TelaPrincipal extends JFrame {
 		listarcliente.setCloseAction(action);
 
 		tabbedPane.addTab("Listar Cliente ", listarcliente);
+		ultimaAba();
 	}
 
 	// private void blockParaLogin() {
@@ -139,8 +168,6 @@ public class TelaPrincipal extends JFrame {
 	// glass.setVisible(true);
 	// }
 
-	// tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
-
 	protected void abrirTelaProduto() throws SQLException {
 		TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto();
 		ActionListener action = new ActionListener() {
@@ -152,6 +179,7 @@ public class TelaPrincipal extends JFrame {
 		telaCadastroProduto.setCloseAction(action);
 
 		tabbedPane.addTab("Produto ", telaCadastroProduto);
+		ultimaAba();
 	}
 
 	private void abrirTelaCliente() throws SQLException {
@@ -165,7 +193,12 @@ public class TelaPrincipal extends JFrame {
 		telaCadastroCliente.setCloseAction(action);
 
 		tabbedPane.addTab("Cliente ", telaCadastroCliente);
+		ultimaAba();
 
+	}
+
+	private void ultimaAba() {
+		tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
 	}
 
 }

@@ -2,18 +2,28 @@ package br.univel.tela.usuario;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JTextField;
+
 import java.awt.Insets;
+
 import javax.swing.JButton;
+
 import java.awt.Color;
+
 import javax.swing.JPasswordField;
+
 import br.univel.cliente.Cliente;
 import br.univel.cliente.ClienteDAOImpl;
 import br.univel.usuario.Usuario;
 import br.univel.usuario.UsuarioDAOImpl;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -154,8 +164,18 @@ public class MioloCadastroUsuario extends JPanel {
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsuarioDAOImpl udao = new UsuarioDAOImpl();
-				udao.inserir(usuarioContexto);
-				return;
+				usuarioContexto.setSenha(new String(passSenha.getPassword()));
+				// if (new String (passSenha.getPassword().equals((new String
+				// (passSenha.getPassword()) {
+				if (new String(passSenha.getPassword()).equals(new String(
+						passConfirmarSenha.getPassword()))) {
+					udao.inserir(usuarioContexto);
+					limpar();
+					return;
+				} else {
+					JOptionPane.showMessageDialog(null, "Senhas Diferentes!");
+					return;
+				}
 			}
 
 		});
@@ -166,6 +186,16 @@ public class MioloCadastroUsuario extends JPanel {
 		gbc_btnConfirmar.gridy = 7;
 		add(btnConfirmar, gbc_btnConfirmar);
 
+	}
+
+	protected void limpar() {
+		txfID.setText("");
+		txfNome.setText("");
+		passSenha.setText("");
+		passConfirmarSenha.setText("");
+		txfID.setEnabled(true);
+		txfID.requestFocus();
+		txfNome.setEnabled(true);
 	}
 
 }

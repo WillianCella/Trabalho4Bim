@@ -88,7 +88,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 		Cliente c = new Cliente();
 		PreparedStatement st = null;
 		ResultSet result = null;
-		String sql = ("SELECT * FROM cliente WHERE id = " + idCliente);
+		String sql = ("SELECT * FROM cliente WHERE idcliente = " + idCliente);
 		try {
 			st = con.getConnection().prepareStatement(sql);
 			result = st.executeQuery();

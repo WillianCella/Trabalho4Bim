@@ -1,20 +1,19 @@
-package br.univel.telas.produto;
+package br.univel.tela.cliente;
 
 import java.awt.BorderLayout;
 import java.sql.SQLException;
-
 import br.univel.telalogin.MolduraAbstrata;
 
-public class TelaCadastroProduto extends MolduraAbstrata {
+public class TelaCadastroCliente extends MolduraAbstrata {
 	private static final long serialVersionUID = 1L;
 
-	public TelaCadastroProduto() throws SQLException {
+	public TelaCadastroCliente() throws SQLException {
 		super();
 	}
 
 	@Override
 	protected void configuraMiolo() throws SQLException {
-		super.add(new MioloCadastroProduto(), BorderLayout.CENTER);
+		super.add(new MioloCadastroCliente(), BorderLayout.CENTER);
 	}
 
 }

@@ -1,51 +1,21 @@
 package br.univel.tela.cliente;
 
-import javax.swing.JPanel;
-
-import java.awt.GridBagLayout;
-
-import javax.swing.JLabel;
-
-import java.awt.Component;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JButton;
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
-import br.univel.Conexao;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import br.univel.cliente.Cliente;
 import br.univel.cliente.ClienteDAOImpl;
 import br.univel.cliente.Estado;
 import br.univel.cliente.Genero;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.io.InputStream;
-import java.io.Reader;
-import java.math.BigDecimal;
-import java.net.URL;
-import java.sql.Array;
-import java.sql.Blob;
-import java.sql.Clob;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.NClob;
-import java.sql.ParameterMetaData;
-import java.sql.PreparedStatement;
-import java.sql.Ref;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.RowId;
-import java.sql.SQLException;
-import java.sql.SQLWarning;
-import java.sql.SQLXML;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.util.Calendar;
 
 public class MioloCadastroCliente extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -55,8 +25,8 @@ public class MioloCadastroCliente extends JPanel {
 	protected JTextField txfEndereco;
 	protected JTextField txfCidade;
 	protected JTextField txfEmail;
-	protected JComboBox cbxEstado;
-	protected JComboBox cbxGenero;
+	protected JComboBox<Object> cbxEstado;
+	protected JComboBox<Object> cbxGenero;
 	protected JLabel lblEndereo;
 	protected JLabel lblCidade;
 	protected JLabel lblEmail;
@@ -131,7 +101,7 @@ public class MioloCadastroCliente extends JPanel {
 		gbc_lblGnero.gridy = 2;
 		add(lblGnero, gbc_lblGnero);
 
-		cbxGenero = new JComboBox(Genero.values());
+		cbxGenero = new JComboBox<Object>(Genero.values());
 		GridBagConstraints gbc_cbxGenero = new GridBagConstraints();
 		gbc_cbxGenero.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbxGenero.insets = new Insets(0, 0, 5, 0);
@@ -183,7 +153,7 @@ public class MioloCadastroCliente extends JPanel {
 		gbc_lblEstado.gridy = 5;
 		add(lblEstado, gbc_lblEstado);
 
-		cbxEstado = new JComboBox(Estado.values());
+		cbxEstado = new JComboBox<Object>(Estado.values());
 		GridBagConstraints gbc_cbxEstado = new GridBagConstraints();
 		gbc_cbxEstado.anchor = GridBagConstraints.WEST;
 		gbc_cbxEstado.insets = new Insets(0, 0, 5, 5);

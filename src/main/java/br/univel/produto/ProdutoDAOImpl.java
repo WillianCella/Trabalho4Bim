@@ -29,7 +29,7 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 	}
 
 	@Override
-	public Produto buscarPorID(Produto p) {
+	public Produto buscarPorID(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

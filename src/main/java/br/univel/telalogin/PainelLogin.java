@@ -81,15 +81,18 @@ public class PainelLogin extends JPanel {
 
 	public PainelLogin(Runnable acaoOk) {
 		this();
-		btnEntrar.addActionListener(e -> {
-			if (textField.getText().trim().equals("root")
-					&& new String(passwordField.getPassword()).equals("123")) {
-				acaoOk.run();
-			} else {
-				JOptionPane.showMessageDialog(PainelLogin.this,
-						"Usuário e/ou senha inválidos!");
-			}
-		});
+		btnEntrar
+				.addActionListener(e -> {
+					if ((textField.getText().trim().equals("willian") && new String(
+							passwordField.getPassword()).equals("123"))
+							|| (textField.getText().trim().equals("root") && new String(
+									passwordField.getPassword()).equals("root"))) {
+						acaoOk.run();
+					} else {
+						JOptionPane.showMessageDialog(PainelLogin.this,
+								"Usuário e/ou senha inválidos!");
+					}
+				});
 
 	}
 

@@ -20,6 +20,7 @@ import br.univel.tela.cliente.TelaListarCliente;
 import br.univel.tela.produto.TelaCadastroProduto;
 import br.univel.tela.usuario.TelaCadastroUsuario;
 import br.univel.telalogin.BlockPanel;
+import br.univel.telalogin.PainelLogin;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -53,7 +54,7 @@ public class TelaPrincipal extends JFrame {
 	 */
 	public TelaPrincipal() {
 
-		// blockParaLogin();
+		blockParaLogin();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 608, 385);
@@ -153,20 +154,20 @@ public class TelaPrincipal extends JFrame {
 		ultimaAba();
 	}
 
-	// private void blockParaLogin() {
-	// Runnable acaoOk = () -> {
-	// glass.setVisible(false);
-	// glass = new BlockPanel();
-	// };
-	//
-	// PainelLogin painelLogin = new PainelLogin(acaoOk);
-	//
-	// glass = new BlockPanel(painelLogin);
-	//
-	// setGlassPane(glass);
-	//
-	// glass.setVisible(true);
-	// }
+	private void blockParaLogin() {
+		Runnable acaoOk = () -> {
+			glass.setVisible(false);
+			glass = new BlockPanel();
+		};
+
+		PainelLogin painelLogin = new PainelLogin(acaoOk);
+
+		glass = new BlockPanel(painelLogin);
+
+		setGlassPane(glass);
+
+		glass.setVisible(true);
+	}
 
 	protected void abrirTelaProduto() throws SQLException {
 		TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto();

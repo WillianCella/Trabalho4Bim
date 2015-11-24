@@ -12,7 +12,7 @@ public interface ProdutoDAO {
 
 	public Produto buscar(int id);
 
-	public Produto buscarPorID(Produto p);
+	public Produto buscarPorID(int id);
 
 	public List<Produto> listar();
 }

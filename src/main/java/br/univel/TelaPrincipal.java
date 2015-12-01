@@ -6,25 +6,28 @@ package br.univel;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.border.EmptyBorder;
 
+import br.univel.tela.cliente.RelatorioCliente;
 import br.univel.tela.cliente.TelaCadastroCliente;
 import br.univel.tela.cliente.TelaListarCliente;
 import br.univel.tela.produto.TelaCadastroProduto;
+import br.univel.tela.produto.TelaListarProduto;
 import br.univel.tela.usuario.TelaCadastroUsuario;
+import br.univel.tela.venda.TelaVender;
 import br.univel.telalogin.BlockPanel;
 import br.univel.telalogin.PainelLogin;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.sql.SQLException;
 
 public class TelaPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -116,6 +119,48 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		mnListar.add(mntmCliente_1);
+
+		JMenuItem mntmProduto_1 = new JMenuItem("Produto");
+		mntmProduto_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					abrirListarProduto();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		mnListar.add(mntmProduto_1);
+
+		JMenu mnRelatrios = new JMenu("Relat\u00F3rios");
+		menuBar.add(mnRelatrios);
+
+		JMenuItem mntmCliete = new JMenuItem("Cliente");
+		mntmCliete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					new RelatorioCliente();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		mnRelatrios.add(mntmCliete);
+
+		JMenu mnVendas = new JMenu("Vendas");
+		menuBar.add(mnVendas);
+
+		JMenuItem mntmVender = new JMenuItem("Vender");
+		mntmVender.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					abrirTelaVendas();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		mnVendas.add(mntmVender);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -123,6 +168,35 @@ public class TelaPrincipal extends JFrame {
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+	}
+
+	protected void abrirTelaVendas() throws SQLException {
+		TelaVender vender = new TelaVender();
+		ActionListener action = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.remove(vender);
+			}
+		};
+		vender.setCloseAction(action);
+
+		tabbedPane.addTab("Vendas ", vender);
+		ultimaAba();
+	}
+
+	protected void abrirListarProduto() throws SQLException {
+		TelaListarProduto listarproduto = new TelaListarProduto();
+		ActionListener action = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.remove(listarproduto);
+			}
+		};
+		listarproduto.setCloseAction(action);
+
+		tabbedPane.addTab("Listar Produto ", listarproduto);
+		ultimaAba();
+
 	}
 
 	protected void abrirTelaUsuario() throws SQLException {

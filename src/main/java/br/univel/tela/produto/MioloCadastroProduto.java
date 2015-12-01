@@ -29,6 +29,9 @@ public class MioloCadastroProduto extends JPanel {
 	 * Create the panel.
 	 */
 	public MioloCadastroProduto() {
+		if (produtoContexto == null) {
+			produtoContexto = new Produto();
+		}
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -151,14 +154,13 @@ public class MioloCadastroProduto extends JPanel {
 
 			private void salvar() {
 				ProdutoDAOImpl pdao = new ProdutoDAOImpl();
-				produtoContexto.setCodigoBarra(Integer.parseInt(txfCodigoBarra
-						.getText()));
 				produtoContexto.setCategoria(txfCategoria.getText());
 				produtoContexto.setDescricao(txfDescricao.getText());
 				produtoContexto.setUnidade(txfUnidade.getText());
-				produtoContexto.setCusto(new BigDecimal(txfUnidade.getText()));
-				produtoContexto.setMargemLucro(new BigDecimal(txfMargemLucro
-						.getText()));
+				produtoContexto.setCusto(BigDecimal.valueOf(Double
+						.valueOf(txfCusto.getText().replaceAll(",", "."))));
+				produtoContexto.setMargemLucro(BigDecimal.valueOf(Double
+						.valueOf(txfMargemLucro.getText().replaceAll(",", "."))));
 				if (produtoContexto.getId() != 0) {
 					limpar();
 					pdao.atualizar(produtoContexto);
@@ -248,6 +250,7 @@ public class MioloCadastroProduto extends JPanel {
 		txfCusto.setText(String.valueOf(produtoContexto.getCusto()));
 		txfMargemLucro
 				.setText(String.valueOf(produtoContexto.getMargemLucro()));
+		txfID.setEnabled(true);
 	}
 
 	protected void limpar() {

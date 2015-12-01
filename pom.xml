@@ -11,6 +11,12 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.4-1205-jdbc42</version>
 		</dependency>
-	</dependencies>
 
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.1.1</version>
+		</dependency>
+
+	</dependencies>
 </project>

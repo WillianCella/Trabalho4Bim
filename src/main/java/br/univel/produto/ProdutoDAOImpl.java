@@ -26,6 +26,7 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 			ps.setBigDecimal(6, p.getMargemLucro());
 
 			ps.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Salvo com Sucesso!");
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -34,7 +35,7 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 
 	@Override
 	public void atualizar(Produto p) {
-		String sql = "UPDATE produto SET codigobarra = ?,  categoria = ?, descricao = ?, unidade = ?, custo = ?, lucro = ? WHERE ID = ?";
+		String sql = "UPDATE produto SET codigobarra = ?,  categoria = ?, descricao = ?, unidade = ?, custo = ?, lucro = ? WHERE idproduto = ?";
 		try {
 			PreparedStatement ps = con.getConnection().prepareStatement(sql);
 			ps.setInt(1, p.getCodigoBarra());
@@ -44,7 +45,7 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 			ps.setBigDecimal(5, p.getCusto());
 			ps.setBigDecimal(6, p.getMargemLucro());
 
-			ps.setInt(8, p.getId());
+			ps.setInt(7, p.getId());
 			ps.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Salvo com Sucesso!");
 		} catch (SQLException e) {
@@ -113,8 +114,10 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 				p.setCategoria(result.getString("categoria"));
 				p.setDescricao(result.getString("descricao"));
 				p.setUnidade(result.getString("unidade"));
-				p.setCusto(new BigDecimal(result.getString("unidade")));
-				p.setMargemLucro(new BigDecimal(result.getString("lucro")));
+				p.setCusto(BigDecimal.valueOf(Double.valueOf(result
+						.getString("custo"))));
+				p.setMargemLucro(BigDecimal.valueOf(Double.valueOf(result
+						.getString("lucro"))));
 			}
 			con.fecharConexao();
 		} catch (SQLException e) {
@@ -142,8 +145,10 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 					p.setCategoria(result.getString("categoria"));
 					p.setDescricao(result.getString("descricao"));
 					p.setUnidade(result.getString("unidade"));
-					p.setCusto(new BigDecimal(result.getString("unidade")));
-					p.setMargemLucro(new BigDecimal(result.getString("lucro")));
+					p.setCusto(BigDecimal.valueOf(Double.valueOf(result
+							.getString("custo"))));
+					p.setMargemLucro(BigDecimal.valueOf(Double.valueOf(result
+							.getString("lucro"))));
 					lista.add(p);
 				}
 			} finally {

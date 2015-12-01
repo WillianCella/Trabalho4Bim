@@ -1,22 +1,39 @@
 package br.univel.tela.venda;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JButton;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JTextField;
+
 import java.awt.Insets;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
+import br.univel.cliente.Cliente;
+import br.univel.cliente.ClienteDAOImpl;
+import br.univel.produto.Produto;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.math.BigDecimal;
+
 public class MioloVendas extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
 	private JTextField txfCliente;
 	private JTable table;
 	private JTable table_1;
 	private ModelVendas modelvendas;
+	private JTextField txfID;
+	protected Cliente clientecontexto;
+	private ModelProdutoCompras mpc = new ModelProdutoCompras();
 
 	/**
 	 * Create the panel.
@@ -41,17 +58,33 @@ public class MioloVendas extends JPanel {
 		gbc_labelID.gridy = 0;
 		add(labelID, gbc_labelID);
 
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridwidth = 4;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 0;
-		add(textField, gbc_textField);
-		textField.setColumns(10);
+		txfID = new JTextField();
+		GridBagConstraints gbc_txfID = new GridBagConstraints();
+		gbc_txfID.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txfID.gridwidth = 4;
+		gbc_txfID.insets = new Insets(0, 0, 5, 5);
+		gbc_txfID.gridx = 1;
+		gbc_txfID.gridy = 0;
+		add(txfID, gbc_txfID);
+		txfID.setColumns(10);
 
 		JButton btnBuscarCliente = new JButton("Buscar Cliente");
+		btnBuscarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ClienteDAOImpl cdao = new ClienteDAOImpl();
+				int id = 0;
+				if ((txfID.getText() == null) || (txfID.getText() == "")
+						|| (txfID.getText().equals(0))) {
+					JOptionPane
+							.showMessageDialog(null, "ID inválido, Informe outro ID");
+					return;
+				}
+
+				id = Integer.parseInt(txfID.getText());
+				clientecontexto = cdao.buscarPorID(id);
+				txfCliente.setText(clientecontexto.getNome());
+			}
+		});
 		GridBagConstraints gbc_btnBuscarCliente = new GridBagConstraints();
 		gbc_btnBuscarCliente.insets = new Insets(0, 0, 5, 5);
 		gbc_btnBuscarCliente.gridx = 5;
@@ -82,6 +115,23 @@ public class MioloVendas extends JPanel {
 		scrollPane.setViewportView(table);
 
 		JButton btnIncluir = new JButton(">>");
+		btnIncluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int item = table.getSelectedRow();
+				Produto p = modelvendas.listaproduto.get(item);
+			    String quantidadeSeleionada = JOptionPane.showInputDialog(this, "Informe a quantidade " );
+				
+			    int quantidade = Integer.parseInt(quantidadeSeleionada); 
+			    
+			    BigDecimal valorTotal =p.getCusto();
+			    valorTotal.multiply(p.getMargemLucro());
+			    valorTotal.add(p.getCusto());
+			    valorTotal.multiply(new BigDecimal(String.valueOf(quantidade)));
+			    //= new BigDecimal(String.valueOf("0.0"));
+			    
+				mpc.addNovoProduto(p, valorTotal, quantidade);
+			}
+		});
 		GridBagConstraints gbc_btnIncluir = new GridBagConstraints();
 		gbc_btnIncluir.insets = new Insets(0, 0, 5, 5);
 		gbc_btnIncluir.gridx = 6;
@@ -111,6 +161,8 @@ public class MioloVendas extends JPanel {
 		table.setModel(modelvendas);
 		
 		txfCliente.setEnabled(false);
+		
+		table_1.setModel(mpc);
 
 	}
 

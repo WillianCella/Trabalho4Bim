@@ -24,6 +24,7 @@ import br.univel.produto.Produto;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class MioloVendas extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +34,7 @@ public class MioloVendas extends JPanel {
 	private ModelVendas modelvendas;
 	private JTextField txfID;
 	protected Cliente clientecontexto;
+	BigDecimal label = new BigDecimal(0);
 	private ModelProdutoCompras mpc = new ModelProdutoCompras();
 
 	/**
@@ -44,7 +46,7 @@ public class MioloVendas extends JPanel {
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				0, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0,
 				1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 1.0,
 				Double.MIN_VALUE };
@@ -75,8 +77,8 @@ public class MioloVendas extends JPanel {
 				int id = 0;
 				if ((txfID.getText() == null) || (txfID.getText() == "")
 						|| (txfID.getText().equals(0))) {
-					JOptionPane
-							.showMessageDialog(null, "ID inválido, Informe outro ID");
+					JOptionPane.showMessageDialog(null,
+							"ID inválido, Informe outro ID");
 					return;
 				}
 
@@ -91,6 +93,22 @@ public class MioloVendas extends JPanel {
 		gbc_btnBuscarCliente.gridy = 0;
 		add(btnBuscarCliente, gbc_btnBuscarCliente);
 
+		JLabel lblValorTotal = new JLabel("Valor Total");
+		GridBagConstraints gbc_lblValorTotal = new GridBagConstraints();
+		gbc_lblValorTotal.gridwidth = 2;
+		gbc_lblValorTotal.insets = new Insets(0, 0, 5, 5);
+		gbc_lblValorTotal.gridx = 9;
+		gbc_lblValorTotal.gridy = 0;
+		add(lblValorTotal, gbc_lblValorTotal);
+
+		JLabel lblValorTotal1 = new JLabel("");
+		GridBagConstraints gbc_lblValorTotal1 = new GridBagConstraints();
+		gbc_lblValorTotal1.gridwidth = 3;
+		gbc_lblValorTotal1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblValorTotal1.gridx = 12;
+		gbc_lblValorTotal1.gridy = 0;
+		add(lblValorTotal1, gbc_lblValorTotal1);
+
 		txfCliente = new JTextField();
 		GridBagConstraints gbc_txfCliente = new GridBagConstraints();
 		gbc_txfCliente.gridwidth = 6;
@@ -100,6 +118,14 @@ public class MioloVendas extends JPanel {
 		gbc_txfCliente.gridy = 1;
 		add(txfCliente, gbc_txfCliente);
 		txfCliente.setColumns(10);
+
+		JButton btnGravar = new JButton("Gravar");
+		GridBagConstraints gbc_btnGravar = new GridBagConstraints();
+		gbc_btnGravar.gridwidth = 3;
+		gbc_btnGravar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnGravar.gridx = 12;
+		gbc_btnGravar.gridy = 1;
+		add(btnGravar, gbc_btnGravar);
 
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -119,17 +145,15 @@ public class MioloVendas extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				int item = table.getSelectedRow();
 				Produto p = modelvendas.listaproduto.get(item);
-			    String quantidadeSeleionada = JOptionPane.showInputDialog(this, "Informe a quantidade " );
-				
-			    int quantidade = Integer.parseInt(quantidadeSeleionada); 
-			    
-			    BigDecimal valorTotal =p.getCusto();
-			    valorTotal.multiply(p.getMargemLucro());
-			    valorTotal.add(p.getCusto());
-			    valorTotal.multiply(new BigDecimal(String.valueOf(quantidade)));
-			    //= new BigDecimal(String.valueOf("0.0"));
-			    
+				BigDecimal quantidade = (BigDecimal.valueOf(Double.valueOf(JOptionPane.showInputDialog(null,"Informe a quntidade"))));
+				BigDecimal preco = p.getMargemLucro().divide(p.getCusto(),RoundingMode.HALF_UP);
+				BigDecimal precoFinal = p.getCusto().multiply(quantidade);
+				BigDecimal valorTotal = preco.add(precoFinal);
+
 				mpc.addNovoProduto(p, valorTotal, quantidade);
+				label = label.add(valorTotal); 
+				lblValorTotal1.setText(String.valueOf(label));
+				
 			}
 		});
 		GridBagConstraints gbc_btnIncluir = new GridBagConstraints();
@@ -156,12 +180,12 @@ public class MioloVendas extends JPanel {
 		gbc_btnRemover.gridx = 6;
 		gbc_btnRemover.gridy = 4;
 		add(btnRemover, gbc_btnRemover);
-		
+
 		modelvendas = new ModelVendas();
 		table.setModel(modelvendas);
-		
+
 		txfCliente.setEnabled(false);
-		
+
 		table_1.setModel(mpc);
 
 	}

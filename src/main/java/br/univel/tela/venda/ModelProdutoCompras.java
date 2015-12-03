@@ -15,10 +15,10 @@ public class ModelProdutoCompras extends AbstractTableModel {
 
 	List<Produto> lista = new ArrayList<>();
 	Map<String, BigDecimal> mapValor = new HashMap<>();
-	Map<String, Integer> mapQuantidade = new HashMap<>();
+	Map<String, BigDecimal> mapQuantidade = new HashMap<>();
 
 	public void addNovoProduto(Produto produto, BigDecimal valorTotal,
-			int quantidade) {
+			BigDecimal quantidade) {
 		lista.add(produto);
 		mapValor.put(produto.getDescricao(), valorTotal);
 		mapQuantidade.put(produto.getDescricao(), quantidade);

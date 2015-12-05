@@ -175,6 +175,11 @@ public class MioloVendas extends JPanel {
 		scrollPane_1.setViewportView(table_1);
 
 		JButton btnRemover = new JButton("<<");
+		btnRemover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Botão Remover
+			}
+		});
 		GridBagConstraints gbc_btnRemover = new GridBagConstraints();
 		gbc_btnRemover.insets = new Insets(0, 0, 0, 5);
 		gbc_btnRemover.gridx = 6;
